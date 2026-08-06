@@ -222,6 +222,7 @@ button {
 
 .home-hero h1,
 .project-hero h1,
+.content-hero h1,
 .privacy-main > h1 {
   position: relative;
   margin: 24px 0 0;
@@ -375,10 +376,33 @@ button {
 }
 
 .text-link {
+  position: relative;
+  display: inline-block;
   align-self: flex-start;
   margin-top: 28px;
+  padding: 8px 0 6px;
   color: #e9e4ee;
   font-size: 0.77rem;
+}
+
+.text-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 1px;
+  background: var(--site-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.text-link:hover::after,
+.text-link:focus-visible::after,
+.featured-project:hover .text-link::after,
+.featured-project:focus-visible .text-link::after {
+  transform: scaleX(1);
 }
 
 .gradient-stage {
@@ -452,8 +476,8 @@ button {
 .about-section,
 .contact-section {
   display: grid;
-  grid-template-columns: 0.35fr 1fr;
-  gap: 7%;
+  grid-template-columns: minmax(100px, 0.22fr) 1fr;
+  gap: 3%;
   padding-top: clamp(72px, 9vw, 110px);
   padding-bottom: clamp(72px, 9vw, 110px);
   border-top: 1px solid var(--site-border);
@@ -484,6 +508,17 @@ button {
   margin: 24px 0 0;
   color: var(--site-muted);
   line-height: 1.78;
+}
+
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-top: 24px;
+}
+
+.section-actions .text-link {
+  margin-top: 0;
 }
 
 .contact-section {
@@ -525,6 +560,43 @@ button {
   margin: 24px 0 0;
   color: var(--site-muted);
   line-height: 1.75;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.project-actions .button--quiet {
+  margin-top: 0;
+}
+
+.policy-link {
+  position: relative;
+  padding: 10px 0;
+  color: #e8e2ee;
+  font-size: 0.78rem;
+}
+
+.policy-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  left: 0;
+  height: 1px;
+  background: var(--site-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.policy-link:hover::after,
+.policy-link:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .project-hero-art {
@@ -740,6 +812,106 @@ button {
   font-weight: 600;
 }
 
+/* About and contact pages */
+.content-main {
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: 0 5% clamp(92px, 12vw, 150px);
+}
+
+.content-hero {
+  position: relative;
+  padding: clamp(82px, 11vw, 138px) 1% clamp(72px, 9vw, 108px);
+  overflow: hidden;
+}
+
+.content-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 430px;
+  height: 430px;
+  right: -250px;
+  top: -220px;
+  border-radius: 50%;
+  background: #743be7;
+  filter: blur(100px);
+  opacity: 0.32;
+}
+
+.content-hero h1 {
+  max-width: 850px;
+}
+
+.content-intro {
+  max-width: 680px;
+  margin: 27px 0 0;
+  color: var(--site-muted);
+  font-size: clamp(1rem, 1.7vw, 1.12rem);
+  line-height: 1.76;
+}
+
+.story-grid,
+.contact-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(22px, 4vw, 48px);
+  border-top: 1px solid var(--site-border);
+}
+
+.story-grid article,
+.contact-options article {
+  padding-top: 34px;
+}
+
+.story-grid h2,
+.contact-options h2,
+.page-cta h2 {
+  margin: 18px 0 0;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.042em;
+}
+
+.story-grid article > p:not(.section-label),
+.contact-options article > p:not(.section-label) {
+  margin: 20px 0 0;
+  color: var(--site-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.availability-note {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 8px 11px;
+  border: 1px solid #403b47;
+  border-radius: 999px;
+  color: var(--site-muted);
+  background: var(--site-surface-raised);
+  font-size: 0.68rem;
+}
+
+.page-cta {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: clamp(78px, 10vw, 120px);
+  padding-top: 36px;
+  border-top: 1px solid var(--site-border);
+}
+
+.page-cta h2 {
+  margin-top: 0;
+}
+
+.page-cta .text-link {
+  flex: 0 0 auto;
+  margin-top: 0;
+}
+
 /* Privacy page */
 .privacy-main {
   max-width: 850px;
@@ -845,6 +1017,7 @@ button {
 
   .home-hero h1,
   .project-hero h1,
+  .content-hero h1,
   .privacy-main > h1 {
     font-size: clamp(3rem, 14vw, 4.6rem);
   }
@@ -881,7 +1054,7 @@ button {
   .about-section,
   .contact-section {
     grid-template-columns: 1fr;
-    gap: 26px;
+    gap: 14px;
   }
 
   .project-hero-art {
@@ -900,6 +1073,21 @@ button {
   .policy-content section {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .story-grid,
+  .contact-options {
+    grid-template-columns: 1fr;
+  }
+
+  .story-grid article,
+  .contact-options article {
+    padding-bottom: 24px;
+  }
+
+  .page-cta {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -924,6 +1112,7 @@ button {
 
   .home-hero h1,
   .project-hero h1,
+  .content-hero h1,
   .privacy-main > h1 {
     font-size: 3.15rem;
   }
