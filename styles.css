@@ -10,7 +10,9 @@
   --site-purple: #9e68ff;
   --site-pink: #ff4fa8;
   --site-teal: #26e4d4;
-  --site-gradient: linear-gradient(92deg, var(--site-purple) 0%, var(--site-pink) 46%, var(--site-teal) 100%);
+  --site-gradient: linear-gradient(92deg, var(--site-pink) 0%, var(--site-purple) 52%, var(--site-teal) 100%);
+  --site-gradient-deep: linear-gradient(145deg, #351329 0%, #24174d 52%, #103944 100%);
+  --site-gradient-border: linear-gradient(135deg, #d548aa 0%, #7f55ef 52%, #29c4ba 100%);
   --site-max: 1180px;
 }
 
@@ -322,7 +324,7 @@ button {
   overflow: hidden;
   border: 1px solid transparent;
   border-radius: 26px;
-  background: linear-gradient(var(--site-surface), var(--site-surface)) padding-box, linear-gradient(135deg, #7f55ef, #d548aa 52%, #29c4ba) border-box;
+  background: linear-gradient(var(--site-surface), var(--site-surface)) padding-box, var(--site-gradient-border) border-box;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
 }
 
@@ -416,7 +418,7 @@ button {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 30px;
-  background: linear-gradient(150deg, #25184f, #20122d 48%, #103944);
+  background: var(--site-gradient-deep);
   box-shadow: 0 32px 62px rgba(0, 0, 0, 0.38);
 }
 
@@ -680,7 +682,7 @@ button {
   overflow: hidden;
   border: 1px solid #393541;
   border-radius: 20px;
-  background: #191820;
+  background: var(--site-gradient-deep);
 }
 
 .gallery-shot::before,
@@ -705,24 +707,12 @@ button {
   top: -65px;
 }
 
-.gallery-shot--purple::before,
-.gallery-shot--violet::before {
-  background: #8648f6;
+.gallery-shot::before {
+  background: var(--site-pink);
 }
 
-.gallery-shot--purple::after,
-.gallery-shot--teal::before,
-.gallery-shot--violet::after {
-  background: #24cfc7;
-}
-
-.gallery-shot--pink::before,
-.gallery-shot--teal::after {
-  background: #d842a7;
-}
-
-.gallery-shot--pink::after {
-  background: #6a4df0;
+.gallery-shot::after {
+  background: var(--site-teal);
 }
 
 .gallery-shot span {
@@ -754,11 +744,11 @@ button {
   padding: 24px;
   border: 1px solid #37333e;
   border-radius: 20px;
-  background: linear-gradient(135deg, #21183d, #2b1731 48%, #12353a);
+  background: var(--site-gradient-deep);
 }
 
 .video-placeholder--social {
-  background: linear-gradient(135deg, #182238, #201832 48%, #16423f);
+  background: var(--site-gradient-deep);
 }
 
 .video-placeholder::before {
@@ -772,10 +762,6 @@ button {
   background: var(--site-pink);
   filter: blur(70px);
   opacity: 0.3;
-}
-
-.video-placeholder--social::before {
-  background: var(--site-teal);
 }
 
 .play-mark {
@@ -980,6 +966,42 @@ button {
   color: var(--site-muted);
   font-size: 0.86rem;
   line-height: 1.78;
+}
+
+.policy-copy {
+  min-width: 0;
+}
+
+.policy-copy > p + p,
+.policy-copy > p + ul,
+.policy-copy > ul + p {
+  margin-top: 16px;
+}
+
+.policy-copy ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--site-muted);
+  font-size: 0.86rem;
+  line-height: 1.78;
+}
+
+.policy-copy li + li {
+  margin-top: 8px;
+}
+
+.policy-copy a {
+  color: #d6b1ff;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.policy-copy a:hover,
+.policy-copy a:focus-visible {
+  color: var(--site-teal);
+  text-decoration-color: var(--site-teal);
 }
 
 .policy-content strong {
