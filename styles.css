@@ -236,6 +236,8 @@ button {
 }
 
 .gradient-text {
+  margin-right: -0.08em;
+  padding-right: 0.08em;
   color: transparent;
   background: var(--site-gradient);
   background-clip: text;
