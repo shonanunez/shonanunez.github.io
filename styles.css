@@ -236,12 +236,14 @@ button {
 }
 
 .gradient-text {
-  margin-right: -0.08em;
-  padding-right: 0.08em;
+  margin-inline: -0.08em;
+  padding-inline: 0.08em;
   color: transparent;
   background: var(--site-gradient);
   background-clip: text;
   -webkit-background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   filter: saturate(1.28) drop-shadow(0 0 18px rgba(211, 73, 180, 0.28));
 }
 
