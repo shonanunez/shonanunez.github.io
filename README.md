@@ -140,7 +140,9 @@ is not guaranteed by adding VideoObject data. A dedicated watch-page strategy
 would be a separate choice if video search becomes a priority.
 
 The favicon uses the same artwork at 96×96px, reducing the browser download from
-251,803 to 9,631 bytes. Its public URL remains stable. Screenshot export sizes are
+251,803 to 9,631 bytes. Its public URL remains stable. For Safari compatibility, every page also declares
+`favicon.ico` with 16, 32 and 48px entries, plus `apple-touch-icon.png` at 180px.
+Both use the original artwork and root-relative URLs. Screenshot export sizes are
 unchanged.
 
 `robots.txt` allows crawling and references `sitemap.xml`, which lists all six
