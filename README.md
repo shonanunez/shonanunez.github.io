@@ -7,6 +7,12 @@ Pages source/branch settings before pushing: a push may trigger a deployment.
 
 Preview with `python3 -m http.server 8000`, then open `http://localhost:8000/`.
 
+After changing `styles.css` or `script.js`, run
+`python3 scripts/version-assets.py` before committing. It puts content-based cache
+keys into every page’s shared asset URLs, including nested privacy pages. GitHub
+Pages serves these assets with a ten-minute cache lifetime; changing the URL
+prevents a newly deployed page from using an older cached stylesheet or script.
+
 ## Pages
 
 | URL | Content |
@@ -73,8 +79,10 @@ blocks automated inspection. The corrected Facebook Apps Page is
 `https://www.facebook.com/profile.php?id=61593748113016`; the personal-profile URL
 is excluded. Final signed-in review remains useful for platform restrictions.
 
-Six icons (Instagram, X, LinkedIn, YouTube, TikTok and Facebook) are stored in one
-small local SVG sprite: `assets/social-icons.svg`. Visible text labels remain;
+Six icons (Instagram, X, LinkedIn, YouTube, TikTok and Facebook) are rendered as
+inline SVGs with unique per-page gradient IDs. This avoids depending on external
+SVG symbol/gradient resolution in Safari. The original authoring sprite remains
+in `assets/social-icons.svg`, but pages no longer request it. Visible text labels remain;
 the decorative icons are hidden from assistive technology. Icons use the site’s
 pink–purple–teal gradient; labels/arrows are white, with a gradient underline on
 hover, keyboard focus and touch press rather than a permanent purple underline. The icons come from
@@ -116,8 +124,24 @@ on the old app preview and privacy policy were removed. Every page has a unique
 content-based title/description, HTTPS self-canonical, Open Graph sharing data,
 large-image card and `en-IE` language. Navigation uses directory URLs. `/project/`
 is retained as the Apps overview; the Poppello canonical and SoftwareApplication
-JSON-LD now point to `/poppello/`. The home page describes the developer as a
-Person. No ratings, reviews, prices or unverified release claims are invented.
+JSON-LD now point to `/poppello/`. Poppello’s title and descriptions identify it
+as a bubble-popping game, and the product page explains the actual four modes,
+colour customisation and statistics in plain HTML. Mode descriptions were checked
+against the app’s en-IE onboarding strings. The approved opening paragraph remains
+unchanged.
+
+The home page identifies the developer as a Person and the site as a WebSite.
+The product page links WebPage, SoftwareApplication and VideoObject data with
+stable IDs. The video name, publisher/channel, upload timestamp and thumbnail were
+verified against YouTube’s public channel feed and oEmbed response. No ratings,
+reviews, prices or unverified release claims are invented. Click-to-play remains
+in place; Google does not interact with play controls, so video-search indexing
+is not guaranteed by adding VideoObject data. A dedicated watch-page strategy
+would be a separate choice if video search becomes a priority.
+
+The favicon uses the same artwork at 96×96px, reducing the browser download from
+251,803 to 9,631 bytes. Its public URL remains stable. Screenshot export sizes are
+unchanged.
 
 `robots.txt` allows crawling and references `sitemap.xml`, which lists all six
 canonical URLs. Static HTML exposes app links, tabs, galleries and product copy
@@ -125,9 +149,13 @@ without JavaScript. Structured data is descriptive, with no promise of eligibili
 for a Google rich result.
 
 On 27 October 2026 the live home, old app preview and privacy pages returned
-HTTP 200 without an `X-Robots-Tag` block; live `robots.txt` returned 404. These local
-changes have **not** been published. After publishing, check the six pages, assets,
-canonical tags, sitemap and HTTP headers again. Then submit
+HTTP 200 without an `X-Robots-Tag` block; live `robots.txt` returned 404. Commit `ab58644` was verified live on 27 October 2026: all six pages, robots.txt,
+sitemap, and all 39 shared/image assets matched the committed files. HTTPS and
+alternate-host redirects worked, missing pages returned 404, and YouTube playback
+worked in Chrome. A stale stylesheet in an existing Chrome session caused giant
+images; a hard refresh resolved it. The subsequent content-based asset-URL fix
+must be committed and pushed separately. After future deployments, check the six
+pages, assets, canonical tags, sitemap and HTTP headers again. Then submit
 `https://snapps.ie/sitemap.xml` in the owner’s Google Search Console property and
 request indexing for Home and Poppello. Search engines control indexing/ranking.
 
@@ -151,3 +179,10 @@ was intercepted for that deterministic UI check; YouTube oEmbed separately
 confirmed embed support. Actual playback depends on YouTube and browser/network
 conditions. Physical iOS Safari and screen-reader review remain useful before
 release, as do signed-in social-link and published-header checks.
+
+The October follow-up also fixes missing gradient icons reproduced in a fresh
+WebKit session: SVG paths and unique gradient definitions are now inline in the
+Contact and Poppello pages. The YouTube watch link uses the same gradient icon;
+Google’s privacy link is white with a tilted external arrow. Both were checked in
+Chrome and WebKit at 390px and 1440px. Native Safari interaction was unavailable,
+so the cross-browser checks used an isolated WebKit 26.5 test runtime.
