@@ -1472,3 +1472,24 @@ button {
   scrollbar-width: thin;
 }
 .video-track .video-slide { scroll-snap-align: start; flex: 0 0 100%; min-width: 0; max-width: none; margin: 0; padding: 0; border: 0; align-self: start; }
+
+/* Balance Poppello's complete set of links with the artwork on wide screens. */
+@media (min-width: 761px) {
+  .featured-project.poppello-preview .project-copy {
+    justify-content: center;
+    padding-block: clamp(36px, 6vw, 68px);
+  }
+  .poppello-preview .project-copy > :first-child { margin-top: 0; }
+}
+
+/* Home and Apps share the same introduction-to-preview spacing. */
+.home-hero,
+.apps-heading { padding-bottom: clamp(40px, 5vw, 64px); }
+.home-hero > .hero-intro,
+.apps-heading > .content-intro { margin-top: 28px; }
+.apps-main .app-tabs { margin-bottom: 20px; }
+.apps-main .section-kicker {
+  flex-direction: row;
+  align-items: center;
+  margin: 0 4px 20px;
+}
