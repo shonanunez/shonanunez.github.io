@@ -1188,7 +1188,7 @@ button {
 
 /* The portrait player is created only when the visitor chooses Play. */
 .video-feature { display: grid; grid-template-columns: 1fr minmax(0, 360px); align-items: center; gap: clamp(32px, 6vw, 80px); padding-top: 64px; padding-bottom: 80px; border-top: 1px solid var(--site-border); }
-.video-copy h2 { margin: 16px 0 24px; font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 600; line-height: 1.08; letter-spacing: -.047em; }
+.video-copy h2, .video-copy h3 { margin: 16px 0 24px; font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 600; line-height: 1.08; letter-spacing: -.047em; }
 .video-copy p:not(.section-label) { color: var(--site-muted); line-height: 1.75; }
 .video-privacy { font-size: .8rem; }
 .video-privacy a { color: #d6b1ff; text-decoration: underline; text-underline-offset: 3px; }
@@ -1445,9 +1445,30 @@ button {
   letter-spacing: -.047em;
 }
 .product-features p:not(.section-label) { color: var(--site-muted); line-height: 1.75; }
-.features-intro { max-width: 680px; margin: 24px 0 0; }
+.features-intro { max-width: none; margin: 24px 0 0; }
 .mode-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 48px; margin-top: 36px; }
 .mode-grid h3 { margin: 0; font-size: 1.2rem; font-weight: 600; }
 .mode-grid p { max-width: 440px; margin: 12px 0 0; font-size: .95rem; }
-.features-note { max-width: 680px; margin: 32px 0 0; font-size: .95rem; }
+.features-note { max-width: none; margin: 32px 0 0; font-size: .95rem; }
 @media (max-width: 760px) { .mode-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.home-project-actions { margin-top: 18px; gap: 12px; }
+.home-project-actions .button { max-width: 100%; }
+
+/* Videos move as complete text/player slides, using the existing arrow controls. */
+.video-carousel { padding-top: 64px; padding-bottom: 80px; border-top: 1px solid var(--site-border); }
+.video-carousel-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin: 0 4px 20px; }
+.video-carousel-heading .section-label { font-weight: 400; }
+.video-track {
+  position: relative;
+  display: flex;
+  gap: 32px;
+  padding: 8px 4px 22px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  scrollbar-color: var(--site-purple) var(--site-surface);
+  scrollbar-width: thin;
+}
+.video-track .video-slide { scroll-snap-align: start; flex: 0 0 100%; min-width: 0; max-width: none; margin: 0; padding: 0; border: 0; align-self: start; }

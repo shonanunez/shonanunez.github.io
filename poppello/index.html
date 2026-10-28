@@ -21,8 +21,8 @@
   <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
   <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <link rel="stylesheet" href="../styles.css?v=87ea7e4fa8cf">
-  <script src="../script.js?v=8ef0cd05f129" defer></script>
+  <link rel="stylesheet" href="../styles.css?v=700d6010a5f4">
+  <script src="../script.js?v=860942e1552c" defer></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,9 +40,14 @@
       "mainEntity": {
         "@id": "https://snapps.ie/poppello/#app"
       },
-      "video": {
-        "@id": "https://snapps.ie/poppello/#video-YYjLGkWVrwc"
-      }
+      "video": [
+        {
+          "@id": "https://snapps.ie/poppello/#video-pyjeqTHm8HM"
+        },
+        {
+          "@id": "https://snapps.ie/poppello/#video-YYjLGkWVrwc"
+        }
+      ]
     },
     {
       "@type": "SoftwareApplication",
@@ -77,6 +82,21 @@
         "https://x.com/snapps_poppello",
         "https://www.youtube.com/@snapps_poppello"
       ]
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://snapps.ie/poppello/#video-pyjeqTHm8HM",
+      "name": "Poppello is available now! 🫧 A little pop. A calmer moment.",
+      "description": "Poppello is available now! A little pop. A calmer moment.",
+      "thumbnailUrl": [
+        "https://i.ytimg.com/vi/pyjeqTHm8HM/hqdefault.jpg"
+      ],
+      "uploadDate": "2026-10-27T17:45:48+00:00",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/pyjeqTHm8HM",
+      "url": "https://www.youtube.com/shorts/pyjeqTHm8HM",
+      "about": {
+        "@id": "https://snapps.ie/poppello/#app"
+      }
     },
     {
       "@type": "VideoObject",
@@ -233,20 +253,49 @@
       <p class="gallery-status" data-status aria-live="polite" aria-atomic="true"></p>
     </section>
 
-    <section class="video-section video-feature" aria-labelledby="video-heading">
+    <section class="video-section video-carousel" data-video-carousel aria-labelledby="videos-heading">
+      <div class="video-carousel-heading">
+        <h2 class="section-label" id="videos-heading">Watch Poppello</h2>
+        <div class="app-navigation">
+          <span class="app-number" data-video-counter>01 / 02</span>
+          <div class="carousel-controls" hidden>
+            <button type="button" data-previous aria-label="Previous video" aria-controls="poppello-videos">←</button>
+            <button type="button" data-next aria-label="Next video" aria-controls="poppello-videos">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="video-track" id="poppello-videos" tabindex="0" role="region" aria-roledescription="carousel" aria-labelledby="videos-heading">
+    <article class="video-feature video-slide" aria-labelledby="video-heading-pyjeqTHm8HM" role="group" aria-roledescription="slide" aria-label="Video 1 of 2">
       <div class="video-copy">
-        <p class="section-label">Watch Poppello</p>
-        <h2 id="video-heading">A little bubble break, in motion.</h2>
-        <p>Take a closer look at Poppello in this short video.</p>
-        <p class="video-privacy" id="video-privacy">Playing loads YouTube’s privacy-enhanced player. YouTube may process playback and device information. <a class="inline-external-link" href="https://policies.google.com/privacy">Google’s privacy policy <span aria-hidden="true">↗</span></a>.</p>
-        <a class="text-link video-watch-link" href="https://www.youtube.com/shorts/YYjLGkWVrwc"><svg class="social-icon" width="20" height="20" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><defs><linearGradient id="social-gradient-video-watch" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff4fa8"/><stop offset="52%" stop-color="#9e68ff"/><stop offset="100%" stop-color="#26e4d4"/></linearGradient></defs><g fill="url(#social-gradient-video-watch)"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></g></svg><span>Watch on YouTube</span><span aria-hidden="true">↗</span></a>
+        <h3 id="video-heading-pyjeqTHm8HM">Poppello is available now!</h3>
+        <p>A little pop. A calmer moment.</p>
+        <p class="video-privacy" id="video-privacy-pyjeqTHm8HM">Playing loads YouTube’s privacy-enhanced player. YouTube may process playback and device information. <a class="inline-external-link" href="https://policies.google.com/privacy">Google’s privacy policy <span aria-hidden="true">↗</span></a>.</p>
+        <a class="text-link video-watch-link" href="https://www.youtube.com/shorts/pyjeqTHm8HM"><svg class="social-icon" width="20" height="20" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><defs><linearGradient id="social-gradient-video-watch-pyjeqTHm8HM" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff4fa8"/><stop offset="52%" stop-color="#9e68ff"/><stop offset="100%" stop-color="#26e4d4"/></linearGradient></defs><g fill="url(#social-gradient-video-watch-pyjeqTHm8HM)"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></g></svg><span>Watch on YouTube</span><span aria-hidden="true">↗</span></a>
       </div>
       <div class="video-frame" data-video-container>
-        <a class="video-launch" href="https://www.youtube.com/shorts/YYjLGkWVrwc" data-video="YYjLGkWVrwc" aria-label="Play the Poppello short video" aria-describedby="video-privacy">
+        <a class="video-launch" href="https://www.youtube.com/shorts/pyjeqTHm8HM" data-video="pyjeqTHm8HM" data-video-title="Poppello is available now! 🫧 A little pop. A calmer moment." aria-label="Play the Poppello launch video" aria-describedby="video-privacy-pyjeqTHm8HM">
           <img src="/assets/poppello/iphone-spread-01-02-960.webp" width="2484" height="2688" alt="" loading="lazy">
           <span class="video-play"><span aria-hidden="true">▶</span> Play video</span>
         </a>
       </div>
+    </article>
+
+    <article class="video-feature video-slide" aria-labelledby="video-heading-YYjLGkWVrwc" role="group" aria-roledescription="slide" aria-label="Video 2 of 2">
+      <div class="video-copy">
+        <h3 id="video-heading-YYjLGkWVrwc">A little bubble break, in motion.</h3>
+        <p>Take a closer look at Poppello in this short video.</p>
+        <p class="video-privacy" id="video-privacy-YYjLGkWVrwc">Playing loads YouTube’s privacy-enhanced player. YouTube may process playback and device information. <a class="inline-external-link" href="https://policies.google.com/privacy">Google’s privacy policy <span aria-hidden="true">↗</span></a>.</p>
+        <a class="text-link video-watch-link" href="https://www.youtube.com/shorts/YYjLGkWVrwc"><svg class="social-icon" width="20" height="20" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><defs><linearGradient id="social-gradient-video-watch" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff4fa8"/><stop offset="52%" stop-color="#9e68ff"/><stop offset="100%" stop-color="#26e4d4"/></linearGradient></defs><g fill="url(#social-gradient-video-watch)"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></g></svg><span>Watch on YouTube</span><span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="video-frame" data-video-container>
+        <a class="video-launch" href="https://www.youtube.com/shorts/YYjLGkWVrwc" data-video="YYjLGkWVrwc" data-video-title="Poppello: Coming Soon" aria-label="Play the Poppello short video" aria-describedby="video-privacy-YYjLGkWVrwc">
+          <img src="/assets/poppello/iphone-spread-01-02-960.webp" width="2484" height="2688" alt="" loading="lazy">
+          <span class="video-play"><span aria-hidden="true">▶</span> Play video</span>
+        </a>
+      </div>
+    </article>
+      </div>
+      <p class="sr-only" data-status aria-live="polite" aria-atomic="true">Video 1 of 2</p>
     </section>
 
     <section class="product-follow" aria-labelledby="follow-heading">

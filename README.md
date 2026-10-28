@@ -27,7 +27,12 @@ prevents a newly deployed page from using an older cached stylesheet or script.
 All six page introductions share the same top spacing and title baseline.
 The dedicated Poppello page has a Back to Apps link. Home’s counter and arrow
 controls share one toolbar, and buttons/tabs use the pink–purple–teal border.
-Home and Apps use Poppello’s full title. Duplicate badges are removed, and neither
+Home and Apps use Poppello’s full title. On Home, Explore Poppello, the App Store
+button and the privacy policy button are separate links, with the buttons wrapping
+below Explore as needed. The product artwork also links to Poppello; the outer
+card is a div so links are never nested.
+
+Duplicate badges are removed, and neither
 Coming Soon card links elsewhere. Both previews share a 560px minimum height on
 desktop and 760px on mobile to keep their proportions consistent.
 
@@ -92,11 +97,28 @@ icon service or additional browser script is used.
 
 ## Video
 
-The dedicated Poppello page embeds the user-selected YouTube Short
-`https://www.youtube.com/shorts/YYjLGkWVrwc`. YouTube oEmbed confirms the Poppello
-channel and title “Poppello: Coming Soon”. This is a **single video, not a feed**:
-new uploads will not appear automatically. A future playlist/channel integration
-would be a separate change.
+The dedicated Poppello page contains two click-to-load YouTube Shorts, newest first:
+
+- `pyjeqTHm8HM`: “Poppello is available now! 🫧 A little pop. A calmer moment.”,
+  published 27 October 2026 at 17:45:48 UTC; added on 28 October.
+- `YYjLGkWVrwc`: “Poppello: Coming Soon”, published 24 October 2026.
+
+Both were verified against the Poppello channel feed and YouTube oEmbed. The newer
+video is confirmed as a vertical Short. Each has unique heading, privacy and SVG
+gradient IDs, an accurate iframe title, and its own VideoObject metadata. Existing
+branded spread artwork is reused as the local poster. Video IDs in the page serve
+as the processed baseline for subsequent monitor runs, preventing duplicates.
+
+The videos share a horizontal carousel with the existing gradient arrow controls,
+a numbered counter and keyboard navigation. Changing slides unloads the previous
+player and restores its Play link, stopping offscreen audio. Without JavaScript,
+both slides remain scrollable and their YouTube links work. Add future videos as
+slides at the start of `.video-track`, updating slide labels, the initial counter
+and VideoObject metadata.
+
+The website embeds are static, rather than a live feed. The separately scheduled
+website-video monitor checks for new uploads Monday–Thursday at 5pm Dublin time
+and prepares local updates for review; it does not commit or publish them.
 
 The local poster links directly to YouTube when JavaScript is unavailable. With
 JavaScript, activation creates a responsive portrait `youtube-nocookie.com`
@@ -128,7 +150,8 @@ JSON-LD now point to `/poppello/`. Poppello’s title and descriptions identify 
 as a bubble-popping game, and the product page explains the actual four modes,
 colour customisation and statistics in plain HTML. Mode descriptions were checked
 against the app’s en-IE onboarding strings. The approved opening paragraph remains
-unchanged.
+unchanged. The feature introduction and closing note use the full section width;
+the four mode descriptions retain their own readable column widths.
 
 The home page identifies the developer as a Person and the site as a WebSite.
 The product page links WebPage, SoftwareApplication and VideoObject data with

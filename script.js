@@ -2,6 +2,7 @@
   document.querySelectorAll('[data-current-year]').forEach(element => {
     element.textContent = String(new Date().getFullYear());
   });
+  const videoPosters = new WeakMap();
   document.querySelectorAll('[data-video]').forEach(link => {
     link.addEventListener('click', event => {
       // Preserve modified clicks and the ordinary link when JavaScript is unavailable.
@@ -9,11 +10,12 @@
       event.preventDefault();
       const frame = document.createElement('iframe');
       frame.src = `https://www.youtube-nocookie.com/embed/${link.dataset.video}?autoplay=1&playsinline=1`;
-      frame.title = 'Poppello: Your Bubble Break — short video';
+      frame.title = link.dataset.videoTitle || 'Poppello: Your Bubble Break — short video';
       frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       frame.allowFullscreen = true;
       frame.referrerPolicy = 'strict-origin-when-cross-origin';
       frame.tabIndex = 0;
+      videoPosters.set(frame, link);
       link.replaceWith(frame);
       frame.focus();
     });
@@ -54,9 +56,10 @@
     select(indexFromAddress());
     window.addEventListener('hashchange', () => select(indexFromAddress()));
   });
-  document.querySelectorAll('[data-gallery], [data-app-showcase]').forEach(gallery => {
+  document.querySelectorAll('[data-gallery], [data-app-showcase], [data-video-carousel]').forEach(gallery => {
     const isShowcase = gallery.hasAttribute('data-app-showcase');
-    const track = gallery.querySelector(isShowcase ? '.app-track' : '.screenshot-track');
+    const isVideo = gallery.hasAttribute('data-video-carousel');
+    const track = gallery.querySelector(isShowcase ? '.app-track' : isVideo ? '.video-track' : '.screenshot-track');
     const slides = Array.from(track.children);
     const previous = gallery.querySelector(isShowcase ? '[data-app-previous]' : '[data-previous]');
     const next = gallery.querySelector(isShowcase ? '[data-app-next]' : '[data-next]');
@@ -65,10 +68,25 @@
     const positions = () => slides.map(slide => slide.offsetLeft - slides[0].offsetLeft);
     const nearest = () => positions().reduce((best, position, index, all) =>
       Math.abs(position - track.scrollLeft) < Math.abs(all[best] - track.scrollLeft) ? index : best, 0);
-    const move = target => track.scrollTo({
-      left: target,
-      behavior: reducedMotion.matches ? 'instant' : 'smooth'
-    });
+    const resetInactivePlayers = index => {
+      if (!isVideo) return;
+      slides.forEach((slide, i) => {
+        if (i === index) return;
+        slide.querySelectorAll('iframe').forEach(frame => {
+          const poster = videoPosters.get(frame);
+          // Restore the poster to stop offscreen playback without loading another player.
+          if (poster) frame.replaceWith(poster);
+        });
+      });
+    };
+    const move = target => {
+      if (isVideo) {
+        const targetIndex = positions().reduce((best, position, index, all) =>
+          Math.abs(position - target) < Math.abs(all[best] - target) ? index : best, 0);
+        resetInactivePlayers(targetIndex);
+      }
+      track.scrollTo({left: target, behavior: reducedMotion.matches ? 'instant' : 'smooth'});
+    };
     const step = direction => move(positions()[Math.max(0, Math.min(slides.length - 1, nearest() + direction))]);
     const update = () => {
       const max = track.scrollWidth - track.clientWidth;
@@ -79,6 +97,17 @@
         .filter(({rect}) => rect.left >= bounds.left - 2 && rect.right <= bounds.right + 2);
       const first = visible.length ? visible[0].i + 1 : nearest() + 1;
       const last = visible.length ? visible[visible.length - 1].i + 1 : first;
+      if (isVideo) {
+        const index = nearest();
+        resetInactivePlayers(index);
+        slides.forEach((slide, i) => {
+          slide.inert = i !== index;
+          slide.setAttribute('aria-hidden', String(i !== index));
+        });
+        status.textContent = `Video ${index + 1} of ${slides.length}`;
+        gallery.querySelector('[data-video-counter]').textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        return;
+      }
       if (isShowcase) {
         const index = nearest();
         status.textContent = `App ${index + 1} of ${slides.length}`;
@@ -96,7 +125,11 @@
       if (actions[event.key]) {event.preventDefault(); actions[event.key]();}
     });
     let timer;
-    track.addEventListener('scroll', () => {clearTimeout(timer); timer = setTimeout(update, 120);}, {passive:true});
+    track.addEventListener('scroll', () => {
+      if (isVideo) resetInactivePlayers(nearest());
+      clearTimeout(timer);
+      timer = setTimeout(update, 120);
+    }, {passive:true});
     new ResizeObserver(update).observe(track);
     gallery.querySelector('.carousel-controls').hidden = false;
     update();
